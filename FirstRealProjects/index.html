@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tip Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="bg-gray-100 text-center p-10">
+    <h1 class="text-4xl font-bold text-blue-600">Tip Calculator!</h1>
+    <input
+      id="input"
+      type="text"
+      placeholder="Type anything"
+      autocomplete="off"
+      class="border-2 border-black rounded p-1.5 text-center overflow-hidden"
+    />
+    <button
+      id="submitBtn"
+      class="mt-5 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+    >
+      Add
+    </button>
+    <button
+      id="clearData"
+      class="mt-5 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+    >
+      Clear
+    </button>
+    <div class="mt-8 flex justify-center">
+      <ul id="todoList" class="border-2"></ul>
+    </div>
+  </body>
+</html>

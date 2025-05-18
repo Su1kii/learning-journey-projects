@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tip Calculator!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body class="bg-gradient-to-r from-pink-500 to-blue-400 text-center p-10">
+    <h1 class="text-center text-4xl font-bold pb-5">Tip Calculator!</h1>
+    <label style="display: flex justify-center">
+      <div class="flex justify-center"></div>
+      <span>$</span>
+
+      <input
+        id="userInput"
+        type="number"
+        placeholder="Add your Bill!"
+        autocomplete="off"
+      />
+      <span>%</span>
+      <input
+        id="userTip"
+        type="number"
+        placeholder="Add your Tip!"
+        autocomplete="off"
+      />
+      <input
+        id="userAmount"
+        type="number"
+        placeholder="Add how many People!!"
+        autocomplete="off"
+      />
+    </label>
+    <button id="addBtn">Add</button>
+    <ul id="myList" class="list-none pt-4"></ul>
+  </body>
+</html>

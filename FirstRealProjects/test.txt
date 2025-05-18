@@ -1,0 +1,80 @@
+const todoForm = document.querySelector("form");
+const todoInput = document.getElementById("todo-input");
+const todoListUL = document.getElementById("todo-list");
+
+let allTodos = getTodos();
+updateTodoList();
+
+todoForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  addTodo();
+});
+
+function addTodo() {
+  const todoText = todoInput.value.trim();
+  if (todoText.length > 0) {
+    const newTodo = { text: todoText, done: false };
+    allTodos.push(newTodo);
+    updateTodoList();
+    saveTodos();
+    todoInput.value = "";
+  }
+}
+
+function updateTodoList() {
+  todoListUL.innerHTML = "";
+  allTodos.forEach((todo, index) => {
+    const todoItem = createTodoItem(todo, index);
+    todoListUL.append(todoItem);
+  });
+}
+
+function createTodoItem(todo, index) {
+  const todoId = `todo-${index}`;
+  const todoLI = document.createElement("li");
+  todoLI.className = "todo";
+
+  if (todo.done) {
+    todoLI.classList.add("done");
+  }
+
+  todoLI.innerHTML = `
+    <input type="checkbox" id="${todoId}" ${todo.done ? "checked" : ""}>
+    <label class="custom-checkbox" for="${todoId}"></label>
+    <label for="${todoId}" class="todo-text">${todo.text}</label>
+    <button class="delete-button">✖</button>
+  `;
+
+  // Checkbox toggle
+  const checkbox = todoLI.querySelector("input[type='checkbox']");
+  checkbox.addEventListener("change", () => {
+    allTodos[index].done = checkbox.checked;
+    saveTodos();
+    updateTodoList(); // re-render to apply class
+  });
+
+  // Delete button
+  const deleteButton = todoLI.querySelector(".delete-button");
+  deleteButton.addEventListener("click", () => {
+    allTodos.splice(index, 1);
+    saveTodos();
+    updateTodoList();
+  });
+
+  return todoLI;
+}
+
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(allTodos));
+}
+
+function getTodos() {
+  try {
+    const todos = localStorage.getItem("todos") || "[]";
+    return JSON.parse(todos);
+  } catch (e) {
+    console.error("Error parsing todos from localStorage. Resetting...");
+    localStorage.removeItem("todos");
+    return [];
+  }
+}
